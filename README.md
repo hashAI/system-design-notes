@@ -35,7 +35,7 @@ If you deeply understand the fundamentals and can walk through the 15 core desig
   - [Notification system](docs/core-design-problems/notification-system.md)
   - [News feed / timeline](docs/core-design-problems/news-feed.md)
   - [File storage (S3-lite)](docs/core-design-problems/file-storage-s3-lite.md)
-  - API gateway
+  - [API gateway](docs/core-design-problems/api-gateway.md)
   - Payment system (high-level flow)
   - Logging & monitoring system
   - Search autocomplete
