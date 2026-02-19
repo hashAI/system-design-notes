@@ -10,6 +10,20 @@ This guide explains the common models in beginner-friendly language and how to t
 
 ---
 
+## 0) The default consistency plan (what you’d propose in most designs)
+
+- Use **strong consistency** for:
+  - money/ledger
+  - inventory reservations
+  - auth/permissions
+- Use **eventual consistency** for:
+  - feeds/timelines
+  - analytics and counters
+  - derived views (search indexes, recommendations)
+- Add **session guarantees** (read-your-writes, monotonic reads) to make UX feel correct even when backend is eventual.
+
+---
+
 ## 1) Start with the user experience
 
 Before naming any model, ask:

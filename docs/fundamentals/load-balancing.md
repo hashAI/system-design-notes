@@ -11,6 +11,18 @@ At senior level, you’re expected to understand:
 
 ---
 
+## 0) The default load balancing plan (good in most designs)
+
+- Put a **stateless** service tier behind an **L7 load balancer** (or gateway).
+- Use health checks:
+  - readiness gates traffic
+  - liveness triggers restarts
+- Use a simple algorithm (RR / least outstanding / P2C).
+- Keep retries **bounded** and only for idempotent requests.
+- Enable connection draining for deploys.
+
+---
+
 ## 1) What a load balancer actually does
 
 At a minimum, a load balancer (LB) does two jobs:

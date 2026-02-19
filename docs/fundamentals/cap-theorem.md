@@ -10,6 +10,20 @@ You don’t “choose two of three all the time.” CAP is about what you do **d
 
 ---
 
+## 0) The default way to apply CAP in real systems
+
+Most real products are mixed:
+
+- choose **CP behavior** for correctness-critical actions (payments, inventory, permissions)
+- choose **AP behavior** for experience/freshness actions (feeds, analytics, telemetry)
+
+The senior move is to tie this to user impact:
+
+- “It’s okay to show a slightly stale feed.”
+- “It’s not okay to double-charge.”
+
+---
+
 ## 1) The three letters in plain English
 
 ### C — Consistency

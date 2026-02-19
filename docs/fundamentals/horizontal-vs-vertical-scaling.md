@@ -9,6 +9,19 @@ Both are useful. Senior engineers know *when each one is the right move* and wha
 
 ---
 
+## 0) The default scaling path (what to do first)
+
+- Start by removing obvious bottlenecks:
+  - cache hot reads
+  - add the right indexes
+  - eliminate N+1 calls and unnecessary fanout
+- Scale the stateless app tier horizontally behind a load balancer.
+- Scale the database in stages:
+  - replicas for reads
+  - sharding/partitioning when writes/storage outgrow a single node
+
+---
+
 ## 1) The simplest mental picture
 
 Imagine a restaurant:
