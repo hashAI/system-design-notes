@@ -1,25 +1,21 @@
 # Load balancing — deep dive
 
-Load balancing is the control plane and data plane machinery that takes traffic from “somewhere” and safely distributes it across many backends while meeting latency, availability, and fairness goals.
+Load balancing distributes requests across multiple backends. The goals are:
 
-At senior level, you’re expected to understand:
-
-- **where** load balancing can happen (client, DNS, L4, L7, service mesh),
-- **what** decisions are being made (routing, retries, timeouts, health, stickiness),
-- **how** it fails (meltdowns, retry storms, uneven load, partial outages),
-- and **how** it interacts with caching, sharding, and multi-region.
+- **Availability**: remove unhealthy backends quickly; survive instance/AZ failures.
+- **Latency**: keep p95/p99 low by avoiding slow/saturated backends.
+- **Throughput**: use all instances efficiently.
+- **Operational safety**: support deploys, draining, and progressive rollouts.
 
 ---
 
 ## 0) The default load balancing plan (good in most designs)
 
-- Put a **stateless** service tier behind an **L7 load balancer** (or gateway).
-- Use health checks:
-  - readiness gates traffic
-  - liveness triggers restarts
-- Use a simple algorithm (RR / least outstanding / P2C).
-- Keep retries **bounded** and only for idempotent requests.
-- Enable connection draining for deploys.
+- Use an **L7 load balancer** (or API gateway) in front of **stateless** service instances.
+- Enable **readiness** checks for traffic gating; use **liveness** for restarts (usually by orchestrator).
+- Routing algorithm: start with **P2C** or **least outstanding requests**; use weights if instances differ.
+- **Timeouts** and **bounded retries** (0–1 retries) only for idempotent operations.
+- Enable **connection draining** for rolling deploys.
 
 ---
 
@@ -205,16 +201,21 @@ Best practice: use both, but avoid flapping:
 - use exponential backoff for re-adding instances,
 - use outlier detection (eject a node with abnormal error rates).
 
-### The “brownout” mindset
+### Load-aware routing (avoid saturated backends)
 
-A backend can be “alive” but unhealthy due to saturation. Advanced systems incorporate:
+A backend can be alive but not safe to receive more traffic (queueing, GC pauses, downstream contention).
 
-- queue length,
-- CPU saturation,
-- load shedding signals,
-- p99 latency spikes.
+Signals to use:
 
-In interviews, mention **load-based shedding** and “don’t route to saturated nodes.”
+- in-flight requests / queue length
+- timeouts and error rate
+- p95/p99 latency
+- CPU saturation
+
+Actions:
+
+- reduce weight temporarily or eject outliers
+- upstream admission control (concurrency caps)
 
 ---
 
@@ -245,18 +246,18 @@ If you must use stickiness, say:
 
 ## 6) Timeouts, retries, and the retry storm trap
 
-L7 LBs and gateways often implement retries. This can save you or kill you.
+Gateways and L7 LBs often implement retries. Retries help transient errors but can amplify load during partial failures.
 
 ### The good
 
 - retry **idempotent** requests on transient failures (connection reset, 502).
 - use hedged requests (carefully) to reduce tail latency.
 
-### The bad (retry storms)
+### Retry storms (how outages get worse)
 
 If a backend is slow, retries amplify load, making it slower.
 
-Senior moves:
+Mitigations:
 
 - **bounded retries** (e.g., 1 retry max),
 - **jittered backoff**,
@@ -365,5 +366,9 @@ High-signal debugging story:
 
 ## 12) Interview-ready summary (what to say in 20 seconds)
 
-“We’ll put a stateless service tier behind an L7 load balancer. The LB does health-checked routing with outlier detection, bounded retries for idempotent requests, and connection draining during deploys. For hotspots or stateful sharding, we’ll use consistent hashing with virtual nodes. Under overload, we shed load with 429/503 and protect the backend with timeouts, circuit breakers, and concurrency limits.”
+- Stateless service tier behind an L7 LB/gateway.
+- Readiness checks + outlier detection; connection draining for deploys.
+- Routing: P2C / least outstanding; consistent hashing when routing by key.
+- Timeouts everywhere; 0–1 retries for idempotent operations; circuit breakers.
+- Overload: admission control + 429/503; prioritize critical endpoints.
 
