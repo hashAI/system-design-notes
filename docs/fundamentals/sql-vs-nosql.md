@@ -1,4 +1,4 @@
-# SQL vs NoSQL — a beginner-friendly guide (when and why)
+# SQL vs NoSQL — practical guide (when and why)
 
 People often ask: “Should we use SQL or NoSQL?”
 
@@ -6,7 +6,21 @@ The better question is:
 
 **What data do we have, what questions do we ask of it, and what correctness guarantees do we need?**
 
-This guide gives you a simple way to choose, with examples you can remember.
+This guide uses the same “system design problem” language: start with requirements and access patterns, choose the simplest store that enforces your invariants, then add derived stores (cache/search) for speed.
+
+---
+
+## 0) The default choice (works for most systems)
+
+If you’re unsure, start with:
+
+- **SQL as source of truth** for core entities and correctness constraints.
+- Add:
+  - **Redis** for caching
+  - **Search index** (OpenSearch/Elasticsearch) for full-text search
+  - **Event log / wide-column** store for massive append-only event streams
+
+Then evolve only when scale/queries force it.
 
 ---
 
@@ -194,6 +208,60 @@ Ask these questions:
    - Yes → wide-column store.
 5. **Do we need full-text search and ranking?**  
    - Use a search index as a derived system (don’t use it as the only truth for money).
+
+---
+
+## 6.1) Worked examples (how this shows up in real designs)
+
+### Example A: E-commerce checkout
+
+Needs:
+
+- inventory can’t go negative
+- payments can’t double-charge
+- orders must be auditable
+
+Pick:
+
+- **SQL** for orders/inventory/payment intents (transactions + constraints)
+- **Redis** for caching product pages and carts
+- **Search index** for product search (derived from catalog)
+
+### Example B: Chat message history
+
+Needs:
+
+- fast “fetch last N messages by conversation”
+- high write throughput
+- ordering per conversation
+
+Pick:
+
+- **wide-column** store (Cassandra-like) or sharded SQL with a schema designed for that query
+- **SQL** for conversation metadata and memberships
+
+### Example C: Rate limiting counters
+
+Needs:
+
+- low-latency increments with TTL
+- high QPS
+
+Pick:
+
+- **Redis** (atomic `INCR` + TTL or Lua scripts)
+
+### Example D: Logging/telemetry events
+
+Needs:
+
+- extremely high write throughput
+- time-based queries, retention, low cost
+
+Pick:
+
+- Kafka + object storage (raw)
+- search index for hot window (optional)
 
 ---
 
