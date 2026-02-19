@@ -6,7 +6,7 @@ Consistency answers:
 
 In distributed systems, different replicas may not agree instantly, so we choose a consistency model that matches the product needs.
 
-This guide explains the common models in beginner-friendly language and how to talk about them in interviews.
+This guide explains the common models and how to apply them in production designs and interviews.
 
 ---
 
