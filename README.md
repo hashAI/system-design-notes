@@ -13,37 +13,37 @@ If you deeply understand the fundamentals and can walk through the 15 core desig
 ### Table of contents
 
 - **Interview framework**
-  - What interviewers evaluate
-  - Design template (copy/paste)
-  - Back-of-the-envelope math (capacity estimation)
+  - [What interviewers evaluate](docs/interview-framework/what-interviewers-evaluate.md)
+  - [Design template (copy/paste)](docs/interview-framework/design-template.md)
+  - [Back-of-the-envelope math (capacity estimation)](docs/interview-framework/capacity-estimation.md)
 - **Fundamentals (non‑negotiable)**
-  - Load balancing
-  - Horizontal vs vertical scaling
-  - Caching (Redis concepts, eviction, invalidation)
-  - Database indexing
-  - SQL vs NoSQL (when and why)
-  - Replication & sharding
-  - CAP theorem (practical)
-  - Consistency models
-  - Rate limiting
-  - Message queues (Kafka/RabbitMQ concepts)
-  - CDN basics
+  - [Load balancing](docs/fundamentals/load-balancing.md)
+  - [Horizontal vs vertical scaling](docs/fundamentals/horizontal-vs-vertical-scaling.md)
+  - [Caching (Redis concepts, eviction, invalidation)](docs/fundamentals/caching.md)
+  - [Database indexing](docs/fundamentals/database-indexing.md)
+  - [SQL vs NoSQL (when and why)](docs/fundamentals/sql-vs-nosql.md)
+  - [Replication & sharding](docs/fundamentals/replication-and-sharding.md)
+  - [CAP theorem (practical)](docs/fundamentals/cap-theorem.md)
+  - [Consistency models](docs/fundamentals/consistency-models.md)
+  - [Rate limiting](docs/fundamentals/rate-limiting.md)
+  - [Message queues (Kafka/RabbitMQ concepts)](docs/fundamentals/message-queues.md)
+  - [CDN basics](docs/fundamentals/cdn-basics.md)
 - **Core design problems (practice these 15)**
-  - URL shortener
-  - Rate limiter
-  - Chat system
-  - Notification system
-  - News feed / timeline
-  - File storage (S3-lite)
-  - API gateway
-  - Payment system (high-level flow)
-  - Logging & monitoring system
-  - Search autocomplete
-  - Video streaming (basic scaling ideas)
-  - Distributed cache
-  - Job scheduler
-  - E-commerce system
-  - Ride-sharing matching (high level)
+  - [URL shortener](docs/core-design-problems/url-shortener.md)
+  - [Rate limiter](docs/core-design-problems/rate-limiter.md)
+  - [Chat system](docs/core-design-problems/chat-system.md)
+  - [Notification system](docs/core-design-problems/notification-system.md)
+  - [News feed / timeline](docs/core-design-problems/news-feed.md)
+  - [File storage (S3-lite)](docs/core-design-problems/file-storage-s3-lite.md)
+  - [API gateway](docs/core-design-problems/api-gateway.md)
+  - [Payment system (high-level flow)](docs/core-design-problems/payment-system.md)
+  - [Logging & monitoring system](docs/core-design-problems/logging-and-monitoring-system.md)
+  - [Search autocomplete](docs/core-design-problems/search-autocomplete.md)
+  - [Video streaming (basic scaling ideas)](docs/core-design-problems/video-streaming.md)
+  - [Distributed cache](docs/core-design-problems/distributed-cache.md)
+  - [Job scheduler](docs/core-design-problems/job-scheduler.md)
+  - [E-commerce system](docs/core-design-problems/e-commerce-system.md)
+  - [Ride-sharing matching (high level)](docs/core-design-problems/ride-sharing-matching.md)
 
 ---
 
@@ -54,7 +54,7 @@ If you deeply understand the fundamentals and can walk through the 15 core desig
 - **Requirements clarity**: ask the right questions; define scope.
 - **Correctness**: does the system do what it claims under failures and concurrency?
 - **Tradeoffs**: latency vs consistency, cost vs reliability, simplicity vs flexibility.
-- **Scalability**: can it grow \(10×–100×\) without a rewrite?
+- **Scalability**: can it grow 10×–100× without a rewrite?
 - **Reliability**: timeouts, retries, backpressure, overload behavior, disaster recovery.
 - **Data thinking**: data model, queries, indexes, partitions, retention, privacy.
 - **Operability**: metrics/logs/traces, alerting, debugging, deployment safety.
@@ -91,8 +91,8 @@ Use this structure in every interview. It keeps you coherent and makes tradeoffs
 
 You don’t need perfect numbers; you need reasonable orders of magnitude and bottleneck intuition.
 
-- **QPS**: \( \text{QPS} \approx \frac{\text{requests/day}}{86{,}400} \). Multiply by a **peak factor** (often 5–20×).
-- **Bandwidth**: \( \text{bytes/request} \times \text{QPS} \).
+- **QPS**: QPS ≈ requests/day ÷ 86,400. Multiply by a **peak factor** (often 5–20×).
+- **Bandwidth**: bandwidth ≈ bytes/request × QPS.
 - **Storage**:
   - events/day × bytes/event × retention days
   - add replication factor and indexes overhead
@@ -202,7 +202,7 @@ Rule: **Choose the simplest store that supports your invariants**. Add specializ
 - **Replication** (copies)
   - **Leader-follower**: strong-ish writes on leader; reads can scale on followers (but face replication lag).
   - **Multi-leader**: better multi-region writes; conflict resolution complexity.
-  - **Quorum**: tune \(R/W/N\) to trade consistency vs availability (common in Dynamo-style systems).
+  - **Quorum**: tune $R/W/N$ to trade consistency vs availability (common in Dynamo-style systems).
 - **Sharding** (partitioning data)
   - Strategies: **hash**, **range**, **directory-based**.
   - Problems: hot shards, resharding, cross-shard queries, distributed transactions.
@@ -674,29 +674,19 @@ Most real systems use a hybrid:
 
 ### Reliability patterns
 
-- **Timeouts everywhere** (per hop) and **bounded retries** (with jitter).
-- **Circuit breakers** to stop cascading failures.
-- **Backpressure**: queue limits, load shedding, concurrency caps.
-- **Bulkheads**: isolate resources per tenant/endpoint.
+- [Reliability patterns](docs/cross-cutting/reliability-patterns.md)
 
 ### Data correctness patterns
 
-- **Idempotency** for all writes that can be retried.
-- **Outbox pattern** for reliable event publishing from DB-backed services.
-- **Exactly-once is rare**; prefer at-least-once + dedupe.
+- [Data correctness patterns](docs/cross-cutting/data-correctness-patterns.md)
 
 ### Observability
 
-- **Golden signals**: latency, traffic, errors, saturation.
-- Correlation IDs across services; structured logs; trace sampling.
-- Alerts on symptoms (SLO burn rate) not just on raw metrics.
+- [Observability](docs/cross-cutting/observability.md)
 
 ### Security & privacy
 
-- Authn/authz, least privilege, secrets management.
-- Encrypt in transit (TLS) and at rest.
-- PII classification, data retention policies, audit logs.
-- Abuse: rate limits, anomaly detection, spam/fraud defenses.
+- [Security & privacy](docs/cross-cutting/security-and-privacy.md)
 
 ---
 
