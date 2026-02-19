@@ -18,7 +18,7 @@ If you deeply understand the fundamentals and can walk through the 15 core desig
   - [Back-of-the-envelope math (capacity estimation)](docs/interview-framework/capacity-estimation.md)
 - **Fundamentals (non‑negotiable)**
   - [Load balancing](docs/fundamentals/load-balancing.md)
-  - Horizontal vs vertical scaling
+  - [Horizontal vs vertical scaling](docs/fundamentals/horizontal-vs-vertical-scaling.md)
   - Caching (Redis concepts, eviction, invalidation)
   - Database indexing
   - SQL vs NoSQL (when and why)
