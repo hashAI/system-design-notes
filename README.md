@@ -38,7 +38,7 @@ If you deeply understand the fundamentals and can walk through the 15 core desig
   - [API gateway](docs/core-design-problems/api-gateway.md)
   - [Payment system (high-level flow)](docs/core-design-problems/payment-system.md)
   - [Logging & monitoring system](docs/core-design-problems/logging-and-monitoring-system.md)
-  - Search autocomplete
+  - [Search autocomplete](docs/core-design-problems/search-autocomplete.md)
   - Video streaming (basic scaling ideas)
   - Distributed cache
   - Job scheduler
