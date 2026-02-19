@@ -30,7 +30,7 @@ If you deeply understand the fundamentals and can walk through the 15 core desig
   - [CDN basics](docs/fundamentals/cdn-basics.md)
 - **Core design problems (practice these 15)**
   - [URL shortener](docs/core-design-problems/url-shortener.md)
-  - Rate limiter
+  - [Rate limiter](docs/core-design-problems/rate-limiter.md)
   - Chat system
   - Notification system
   - News feed / timeline
