@@ -1,10 +1,19 @@
-# Caching (Redis concepts, eviction, invalidation) — simple but deep
+# Caching (Redis concepts, eviction, invalidation) — simple, deep, and production-ready
 
 Caching is one of the fastest ways to make systems feel “instant.”
 
 But caching is also one of the easiest ways to create subtle bugs (stale data, weird inconsistencies, sudden outages from stampedes).
 
-This guide explains caching in simple language, with the parts you need for system design interviews and real production systems.
+This guide uses the same practical style as the core design problems: default patterns you’ll use, how they fail, and what tradeoffs to call out.
+
+---
+
+## 0) The default caching plan (use this unless you have a reason not to)
+
+- **Pattern**: cache-aside with Redis for read-heavy data.
+- **Freshness**: TTL everywhere; add explicit invalidation (delete-on-write) when you need tighter correctness.
+- **Safety**: stampede protection (TTL jitter + single-flight refresh).
+- **Failure mode**: if cache is down, fall back to DB *but protect the DB* with rate limits/load shedding.
 
 ---
 
@@ -146,6 +155,34 @@ Cons:
 - harder correctness story
 
 Most interview designs use **cache-aside** unless there’s a strong reason otherwise.
+
+---
+
+## 5.1) A concrete cache-aside example (user profile)
+
+Goal: make `GET /users/{id}` fast without breaking correctness.
+
+Cache key:
+
+- `user:profile:{user_id}`
+
+Read path:
+
+1. App does `GET user:profile:123` from Redis.
+2. If hit → return.
+3. If miss:
+   - read from DB
+   - `SET user:profile:123` with TTL
+   - return
+
+Write path (user updates profile):
+
+1. Update DB (source of truth).
+2. Invalidate cache (simple and safe):
+   - `DEL user:profile:123`
+3. Next read repopulates.
+
+This is the default pattern because it’s easy to reason about under retries and partial failures.
 
 ---
 
