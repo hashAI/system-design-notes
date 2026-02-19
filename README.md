@@ -32,7 +32,7 @@ If you deeply understand the fundamentals and can walk through the 15 core desig
   - [URL shortener](docs/core-design-problems/url-shortener.md)
   - [Rate limiter](docs/core-design-problems/rate-limiter.md)
   - [Chat system](docs/core-design-problems/chat-system.md)
-  - Notification system
+  - [Notification system](docs/core-design-problems/notification-system.md)
   - News feed / timeline
   - File storage (S3-lite)
   - API gateway
