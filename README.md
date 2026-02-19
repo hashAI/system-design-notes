@@ -686,10 +686,7 @@ Most real systems use a hybrid:
 
 ### Security & privacy
 
-- Authn/authz, least privilege, secrets management.
-- Encrypt in transit (TLS) and at rest.
-- PII classification, data retention policies, audit logs.
-- Abuse: rate limits, anomaly detection, spam/fraud defenses.
+- [Security & privacy](docs/cross-cutting/security-and-privacy.md)
 
 ---
 
