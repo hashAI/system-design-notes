@@ -40,7 +40,7 @@ If you deeply understand the fundamentals and can walk through the 15 core desig
   - [Logging & monitoring system](docs/core-design-problems/logging-and-monitoring-system.md)
   - [Search autocomplete](docs/core-design-problems/search-autocomplete.md)
   - [Video streaming (basic scaling ideas)](docs/core-design-problems/video-streaming.md)
-  - Distributed cache
+  - [Distributed cache](docs/core-design-problems/distributed-cache.md)
   - Job scheduler
   - E-commerce system
   - Ride-sharing matching (high level)
