@@ -19,7 +19,7 @@ If you deeply understand the fundamentals and can walk through the 15 core desig
 - **Fundamentals (non‑negotiable)**
   - [Load balancing](docs/fundamentals/load-balancing.md)
   - [Horizontal vs vertical scaling](docs/fundamentals/horizontal-vs-vertical-scaling.md)
-  - Caching (Redis concepts, eviction, invalidation)
+  - [Caching (Redis concepts, eviction, invalidation)](docs/fundamentals/caching.md)
   - Database indexing
   - SQL vs NoSQL (when and why)
   - Replication & sharding
