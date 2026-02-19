@@ -9,9 +9,7 @@ It’s used to:
 - prevent cascading failures during spikes
 - enforce quotas (per user, per API key, per IP)
 
-If you remember one line:
-
-> Rate limiting is how you keep the system usable when traffic is not “nice.”
+Rate limiting enforces per-identity/per-resource request limits to protect capacity and enforce fairness.
 
 ---
 
@@ -51,7 +49,7 @@ Senior tip: use more than one layer when needed (defense in depth).
 
 ---
 
-## 3) The 4 common algorithms (easy to remember)
+## 3) Common algorithms
 
 ### A) Fixed window
 
@@ -69,7 +67,7 @@ Senior tip: use more than one layer when needed (defense in depth).
 
 ### C) Token bucket (most common for APIs)
 
-Imagine a bucket of tokens:
+Token bucket model:
 
 - tokens refill at a steady rate
 - each request spends 1 token
