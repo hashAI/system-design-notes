@@ -37,7 +37,7 @@ If you deeply understand the fundamentals and can walk through the 15 core desig
   - [File storage (S3-lite)](docs/core-design-problems/file-storage-s3-lite.md)
   - [API gateway](docs/core-design-problems/api-gateway.md)
   - [Payment system (high-level flow)](docs/core-design-problems/payment-system.md)
-  - Logging & monitoring system
+  - [Logging & monitoring system](docs/core-design-problems/logging-and-monitoring-system.md)
   - Search autocomplete
   - Video streaming (basic scaling ideas)
   - Distributed cache
