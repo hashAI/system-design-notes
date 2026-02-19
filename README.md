@@ -13,7 +13,7 @@ If you deeply understand the fundamentals and can walk through the 15 core desig
 ### Table of contents
 
 - **Interview framework**
-  - What interviewers evaluate
+  - [What interviewers evaluate](docs/interview-framework/what-interviewers-evaluate.md)
   - Design template (copy/paste)
   - Back-of-the-envelope math (capacity estimation)
 - **Fundamentals (non‑negotiable)**
