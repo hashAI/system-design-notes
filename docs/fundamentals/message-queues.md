@@ -14,6 +14,16 @@ Simple memory trick:
 
 ---
 
+## 0) The default queue plan (what you propose in most designs)
+
+- Put slow/non-critical work behind a queue (notifications, analytics, indexing).
+- Assume **at-least-once** delivery.
+- Make consumers **idempotent** (dedupe by message/event ID).
+- Add **retries with backoff** and a **DLQ** for poison messages.
+- Monitor queue depth/lag so you catch trouble early.
+
+---
+
 ## 1) Why queues exist (the 4 big reasons)
 
 ### A) Smooth spikes

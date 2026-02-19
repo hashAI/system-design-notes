@@ -10,6 +10,16 @@ This guide explains CDNs in plain language, including caching rules, invalidatio
 
 ---
 
+## 0) The default CDN plan (works for most products)
+
+- Put all **static assets** (images/CSS/JS/video segments) behind a CDN.
+- Use **versioned URLs** for assets so deploys don’t require mass invalidation.
+- Keep **HTML** TTL short; keep **assets** TTL long.
+- Be explicit about **cache keys** (avoid caching personalized/private responses incorrectly).
+- Monitor **cache hit ratio** and **origin load**.
+
+---
+
 ## 1) The “origin vs edge” picture
 
 - **Origin**: your main backend/server (where content “really” lives).

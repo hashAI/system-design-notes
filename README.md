@@ -91,8 +91,8 @@ Use this structure in every interview. It keeps you coherent and makes tradeoffs
 
 You don’t need perfect numbers; you need reasonable orders of magnitude and bottleneck intuition.
 
-- **QPS**: $ \text{QPS} \approx \frac{\text{requests/day}}{86{,}400} $. Multiply by a **peak factor** (often 5–20×).
-- **Bandwidth**: $ \text{bytes/request} \times \text{QPS} $.
+- **QPS**: QPS ≈ requests/day ÷ 86,400. Multiply by a **peak factor** (often 5–20×).
+- **Bandwidth**: bandwidth ≈ bytes/request × QPS.
 - **Storage**:
   - events/day × bytes/event × retention days
   - add replication factor and indexes overhead

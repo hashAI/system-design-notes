@@ -15,6 +15,18 @@ If you remember one line:
 
 ---
 
+## 0) The default rate limiting plan (good starting point)
+
+- Enforce at **gateway/edge** first.
+- Use **token bucket** for per-second/per-minute limits (bursty APIs).
+- Add a **fixed window daily cap** if you have quotas (B2B/API keys).
+- Return **429** with `Retry-After`.
+- If the limiter store is down, define behavior explicitly:
+  - fail-closed for high-risk endpoints (login/OTP)
+  - fail-open for low-risk endpoints (non-critical reads)
+
+---
+
 ## 1) What rate limiting looks like in practice
 
 Examples:

@@ -12,6 +12,23 @@ They solve different problems:
 
 ---
 
+## 0) The default scaling path (what you’ll do in many designs)
+
+If you’re not sure what to propose, this is a safe progression:
+
+1. **Index and query tuning** (often the biggest win).
+2. **Replication** (read replicas) to scale reads and improve availability.
+3. **Sharding** when:
+   - the dataset no longer fits on a single node, or
+   - the write rate is too high for a single leader.
+
+Then call out the two classic gotchas:
+
+- replication causes **lag** (stale reads)
+- sharding causes **cross-shard complexity** (queries/transactions/migrations)
+
+---
+
 ## 1) Replication (copies of the same data)
 
 ### What replication gives you
