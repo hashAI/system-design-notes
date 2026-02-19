@@ -54,7 +54,7 @@ If you deeply understand the fundamentals and can walk through the 15 core desig
 - **Requirements clarity**: ask the right questions; define scope.
 - **Correctness**: does the system do what it claims under failures and concurrency?
 - **Tradeoffs**: latency vs consistency, cost vs reliability, simplicity vs flexibility.
-- **Scalability**: can it grow \(10×–100×\) without a rewrite?
+- **Scalability**: can it grow 10×–100× without a rewrite?
 - **Reliability**: timeouts, retries, backpressure, overload behavior, disaster recovery.
 - **Data thinking**: data model, queries, indexes, partitions, retention, privacy.
 - **Operability**: metrics/logs/traces, alerting, debugging, deployment safety.
@@ -91,8 +91,8 @@ Use this structure in every interview. It keeps you coherent and makes tradeoffs
 
 You don’t need perfect numbers; you need reasonable orders of magnitude and bottleneck intuition.
 
-- **QPS**: \( \text{QPS} \approx \frac{\text{requests/day}}{86{,}400} \). Multiply by a **peak factor** (often 5–20×).
-- **Bandwidth**: \( \text{bytes/request} \times \text{QPS} \).
+- **QPS**: $ \text{QPS} \approx \frac{\text{requests/day}}{86{,}400} $. Multiply by a **peak factor** (often 5–20×).
+- **Bandwidth**: $ \text{bytes/request} \times \text{QPS} $.
 - **Storage**:
   - events/day × bytes/event × retention days
   - add replication factor and indexes overhead
@@ -202,7 +202,7 @@ Rule: **Choose the simplest store that supports your invariants**. Add specializ
 - **Replication** (copies)
   - **Leader-follower**: strong-ish writes on leader; reads can scale on followers (but face replication lag).
   - **Multi-leader**: better multi-region writes; conflict resolution complexity.
-  - **Quorum**: tune \(R/W/N\) to trade consistency vs availability (common in Dynamo-style systems).
+  - **Quorum**: tune $R/W/N$ to trade consistency vs availability (common in Dynamo-style systems).
 - **Sharding** (partitioning data)
   - Strategies: **hash**, **range**, **directory-based**.
   - Problems: hot shards, resharding, cross-shard queries, distributed transactions.

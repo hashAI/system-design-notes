@@ -154,7 +154,7 @@ If the interview is 60 minutes, you can afford an extra deep dive (data model + 
 
 High-signal phrasing:
 
-- “We’ll support \(X\) and \(Y\) flows; we won’t build \(Z\) today.”
+- “We’ll support $X$ and $Y$ flows; we won’t build $Z$ today.”
 - “Reads should be p95 < 150ms; writes can be p95 < 1s.”
 - “Inventory must be strongly consistent; the product feed can be eventual.”
 
@@ -177,7 +177,7 @@ Always call out:
 High-signal phrasing:
 
 - “Our hot query is ‘fetch latest 50 items by user’; we model it to be a single partition read.”
-- “Indexes: we index by \(X\) because that’s the filter; we include columns \(Y,Z\) as a covering index for the list view.”
+- “Indexes: we index by $X$ because that’s the filter; we include columns $Y,Z$ as a covering index for the list view.”
 
 ### Architecture: minimal components, clear responsibilities
 
