@@ -1,12 +1,8 @@
-# CDN basics — simple, deep guide
+# CDN basics — practical deep dive
 
 A **CDN (Content Delivery Network)** is a network of servers around the world that helps deliver content faster and cheaper.
 
-The idea is simple:
-
-> Put content closer to users so requests travel less distance and your origin servers do less work.
-
-This guide explains CDNs in plain language, including caching rules, invalidation, and common pitfalls.
+A CDN caches and serves content from edge POPs to reduce latency and origin load. It also commonly provides TLS termination and DDoS/WAF capabilities.
 
 ---
 
@@ -31,10 +27,12 @@ When a user requests an image:
 2. If edge has it cached → return immediately (**cache hit**).
 3. If not → edge fetches from origin, stores it, then returns (**cache miss**).
 
-Memory trick:
+Key concepts:
 
-- Origin = central warehouse
-- Edge = local stores
+- cache keys and variation (query params, headers)
+- TTL and cache-control
+- invalidation vs versioned URLs
+- private content (signed URLs/cookies)
 
 ---
 
@@ -114,7 +112,7 @@ Sometimes content changes and you need the CDN to stop serving the old version.
 
 Options:
 
-### A) Wait for TTL (simplest)
+### A) Wait for TTL
 
 Let it expire naturally.
 
