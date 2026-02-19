@@ -29,7 +29,7 @@ If you deeply understand the fundamentals and can walk through the 15 core desig
   - [Message queues (Kafka/RabbitMQ concepts)](docs/fundamentals/message-queues.md)
   - [CDN basics](docs/fundamentals/cdn-basics.md)
 - **Core design problems (practice these 15)**
-  - URL shortener
+  - [URL shortener](docs/core-design-problems/url-shortener.md)
   - Rate limiter
   - Chat system
   - Notification system
