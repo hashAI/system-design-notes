@@ -1,6 +1,6 @@
-# Message queues (Kafka/RabbitMQ concepts) — beginner-friendly deep dive
+# Message queues (Kafka/RabbitMQ concepts) — practical deep dive
 
-Message queues help you build systems that don’t fall over when traffic spikes.
+Message queues/streams decouple producers and consumers. They are used for buffering, async execution, and event-driven architectures.
 
 They do this by **decoupling** parts of your system:
 
@@ -8,9 +8,12 @@ They do this by **decoupling** parts of your system:
 - Queue/stream: “I’ll hold it safely and deliver it.”
 - Consumer/worker: “I’ll do the work when I can.”
 
-Simple memory trick:
+Core properties to state in designs:
 
-- Queue = “to-do list for computers.”
+- delivery semantics (at-most-once / at-least-once)
+- ordering scope (per partition/queue, not global)
+- retries/backoff and DLQ
+- idempotent consumers
 
 ---
 
@@ -95,7 +98,7 @@ This is why many systems are “at-least-once.”
 
 ## 4) Kafka (distributed log) — what to know
 
-Kafka is like a giant append-only log.
+Kafka is a distributed log with partitioned ordering and retention/replay.
 
 ### Best for
 
@@ -161,7 +164,7 @@ Fix:
 - include an idempotency key (e.g., `payment_id`)
 - store “already processed” state in a DB (or transactionally with your side effects)
 
-Simple rule:
+Rule:
 
 - “Queue systems duplicate; your code must tolerate it.”
 
