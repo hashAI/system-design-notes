@@ -24,11 +24,11 @@ Then evolve only when scale/queries force it.
 
 ---
 
-## 1) The simple mental model
+## 1) What “SQL” and “NoSQL” mean in practice
 
 ### SQL databases (relational)
 
-Think “**tables with rules**.”
+Relational tables with transactions and constraints.
 
 - Data is stored in tables (rows/columns).
 - You can join tables (combine related data).
@@ -46,7 +46,7 @@ Examples:
 
 ### NoSQL databases (several families)
 
-Think “**data shaped for a specific access pattern**.”
+Data models optimized for specific access patterns at scale (family of systems, not one database type).
 
 NoSQL is not one thing. It includes:
 
@@ -175,7 +175,7 @@ Tradeoff:
 
 ---
 
-## 5) A common real-world pattern: “SQL + derived views”
+## 5) Common pattern: SQL source of truth + derived stores
 
 Many systems use:
 
@@ -185,12 +185,10 @@ Many systems use:
   - **Elasticsearch/OpenSearch** for full-text search
   - **Cassandra** or object storage for high-volume event logs
 
-Simple memory trick:
+Rule of thumb:
 
-- **SQL = truth**
-- **NoSQL/search/cache = speed**
-
-This is not always true, but it’s a safe starting mental model.
+- Keep one **source of truth** for correctness-critical state (often SQL).
+- Use caches/search/analytics stores as **derived views** that can be rebuilt.
 
 ---
 
