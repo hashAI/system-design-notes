@@ -1,8 +1,8 @@
-# Caching (Redis concepts, eviction, invalidation) — simple, deep, and production-ready
+# Caching (Redis concepts, eviction, invalidation) — practical deep dive
 
-Caching is one of the fastest ways to make systems feel “instant.”
+Caching reduces latency and backend load by serving data from a faster store (memory/edge) instead of the source of truth.
 
-But caching is also one of the easiest ways to create subtle bugs (stale data, weird inconsistencies, sudden outages from stampedes).
+Caching also introduces failure modes (stale reads, stampedes, hot keys). You must define correctness guarantees and fallback behavior.
 
 This guide uses the same practical style as the core design problems: default patterns you’ll use, how they fail, and what tradeoffs to call out.
 
@@ -19,7 +19,7 @@ This guide uses the same practical style as the core design problems: default pa
 
 ## 1) What is a cache?
 
-A **cache** is a fast place where you keep a copy of data so you don’t have to fetch it from a slower place every time.
+A **cache** is a fast store that holds copies of data derived from a slower source of truth (usually a database or another service).
 
 Examples:
 
@@ -28,10 +28,11 @@ Examples:
 - Service cache (in-memory or Redis)
 - Database buffer cache (inside the DB)
 
-**Simple memory trick**:
+Key implications:
 
-- Database = “warehouse” (slower, reliable)
-- Cache = “front desk” (fast, but not always up-to-date)
+- cached data can be **stale**
+- cache capacity is limited → **evictions**
+- cache outages can shift load to the DB → design fallbacks
 
 ---
 
