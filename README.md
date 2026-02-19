@@ -27,7 +27,7 @@ If you deeply understand the fundamentals and can walk through the 15 core desig
   - [Consistency models](docs/fundamentals/consistency-models.md)
   - [Rate limiting](docs/fundamentals/rate-limiting.md)
   - [Message queues (Kafka/RabbitMQ concepts)](docs/fundamentals/message-queues.md)
-  - CDN basics
+  - [CDN basics](docs/fundamentals/cdn-basics.md)
 - **Core design problems (practice these 15)**
   - URL shortener
   - Rate limiter
