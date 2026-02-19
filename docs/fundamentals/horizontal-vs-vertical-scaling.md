@@ -1,11 +1,11 @@
-# Horizontal vs vertical scaling — beginner-friendly deep dive
+# Horizontal vs vertical scaling — practical deep dive
 
 When a system gets slow or starts failing under load, you have two basic ways to add capacity:
 
 - **Vertical scaling**: make one machine bigger.
 - **Horizontal scaling**: add more machines.
 
-Both are useful. Senior engineers know *when each one is the right move* and what extra work horizontal scaling requires.
+Both are useful. The key is understanding the constraints each approach introduces (state, coordination, data partitioning, and failure modes).
 
 ---
 
@@ -22,14 +22,12 @@ Both are useful. Senior engineers know *when each one is the right move* and wha
 
 ---
 
-## 1) The simplest mental picture
+## 1) Quick definitions (use these in designs)
 
-Imagine a restaurant:
+- **Vertical scaling (scale up)**: move to a larger machine (more CPU/RAM/IOPS) for the same component.
+- **Horizontal scaling (scale out)**: add more machines and distribute load across them.
 
-- **Vertical scaling** = hire one super-chef and buy a bigger stove for the same kitchen.
-- **Horizontal scaling** = open more kitchens and split orders between them.
-
-Vertical scaling is easy at first. Horizontal scaling is more powerful, but you must coordinate “many kitchens.”
+Vertical scaling is usually a short-term move. Horizontal scaling is the long-term path, but it requires stateless services and a data scaling plan.
 
 ---
 
