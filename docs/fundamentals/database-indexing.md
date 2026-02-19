@@ -57,9 +57,9 @@ Simple rule:
 
 ---
 
-## 3) Why indexes speed things up (simple story)
+## 3) Why indexes speed things up
 
-Imagine a table with 100 million rows.
+Without an index, many queries require scanning large portions of a table.
 
 - Without an index on `email`, a query like `WHERE email = 'a@b.com'` might scan a huge portion of the table.
 - With an index on `email`, the DB can find the row location quickly.
@@ -68,7 +68,7 @@ This is why “add an index” is often the first scaling step **before** adding
 
 ---
 
-## 4) The 3 most important index concepts
+## 4) The most important index concepts
 
 ### A) Selectivity (how unique a column is)
 
@@ -83,7 +83,7 @@ But low-selectivity columns can still be useful **as part of a composite index**
 
 An index can be on multiple columns, like `(user_id, created_at)`.
 
-Memorable rule: **leftmost prefix rule**
+Rule: **leftmost prefix**
 
 - Index on `(user_id, created_at)` helps:
   - `WHERE user_id = ...`
