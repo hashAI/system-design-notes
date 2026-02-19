@@ -42,7 +42,7 @@ If you deeply understand the fundamentals and can walk through the 15 core desig
   - [Video streaming (basic scaling ideas)](docs/core-design-problems/video-streaming.md)
   - [Distributed cache](docs/core-design-problems/distributed-cache.md)
   - [Job scheduler](docs/core-design-problems/job-scheduler.md)
-  - E-commerce system
+  - [E-commerce system](docs/core-design-problems/e-commerce-system.md)
   - Ride-sharing matching (high level)
 
 ---
