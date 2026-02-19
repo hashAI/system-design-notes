@@ -39,7 +39,7 @@ If you deeply understand the fundamentals and can walk through the 15 core desig
   - [Payment system (high-level flow)](docs/core-design-problems/payment-system.md)
   - [Logging & monitoring system](docs/core-design-problems/logging-and-monitoring-system.md)
   - [Search autocomplete](docs/core-design-problems/search-autocomplete.md)
-  - Video streaming (basic scaling ideas)
+  - [Video streaming (basic scaling ideas)](docs/core-design-problems/video-streaming.md)
   - Distributed cache
   - Job scheduler
   - E-commerce system
