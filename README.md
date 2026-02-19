@@ -31,7 +31,7 @@ If you deeply understand the fundamentals and can walk through the 15 core desig
 - **Core design problems (practice these 15)**
   - [URL shortener](docs/core-design-problems/url-shortener.md)
   - [Rate limiter](docs/core-design-problems/rate-limiter.md)
-  - Chat system
+  - [Chat system](docs/core-design-problems/chat-system.md)
   - Notification system
   - News feed / timeline
   - File storage (S3-lite)
