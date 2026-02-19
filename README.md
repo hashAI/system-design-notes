@@ -674,10 +674,7 @@ Most real systems use a hybrid:
 
 ### Reliability patterns
 
-- **Timeouts everywhere** (per hop) and **bounded retries** (with jitter).
-- **Circuit breakers** to stop cascading failures.
-- **Backpressure**: queue limits, load shedding, concurrency caps.
-- **Bulkheads**: isolate resources per tenant/endpoint.
+- [Reliability patterns](docs/cross-cutting/reliability-patterns.md)
 
 ### Data correctness patterns
 
