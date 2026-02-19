@@ -1,8 +1,8 @@
 # CAP theorem (practical) — simple explanation
 
-CAP is one of the most misunderstood topics in system design interviews.
+CAP is about tradeoffs during network partitions.
 
-The practical version is short:
+Practical statement:
 
 > When there is a **network partition** (some servers can’t talk to others), a distributed system must choose between **Consistency** and **Availability**.
 
@@ -48,7 +48,7 @@ In real distributed systems, partitions happen. So **you must tolerate partition
 
 ---
 
-## 2) The simplest story (two replicas, broken network)
+## 2) Example: two replicas with a network partition
 
 You have two database replicas: Left and Right.
 
@@ -157,7 +157,7 @@ CAP is one lens. Consistency models are a deeper toolbox.
 
 ---
 
-## 7) Interview-ready talk track (simple and correct)
+## 7) Interview-ready talk track
 
 “CAP says that during network partitions, you can’t have both strong consistency and availability. For money/inventory we choose CP behavior: we’d rather fail requests than serve wrong answers. For feeds/analytics we choose AP behavior: we keep serving, accept staleness, and reconcile later. Most systems are a mix depending on the user impact.”
 
