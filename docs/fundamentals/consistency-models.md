@@ -1,6 +1,6 @@
-# Consistency models — simple guide (strong vs eventual)
+# Consistency models — practical guide (strong vs eventual)
 
-“Consistency” answers a simple question:
+Consistency answers:
 
 > If I write something, what can other people read — and when?
 
@@ -95,7 +95,7 @@ So a read might be stale for a short time.
 
 ---
 
-## 4) “Session” guarantees (very practical and easy to remember)
+## 4) Session guarantees (practical)
 
 These are user-friendly consistency promises that make products feel correct even if the backend is eventually consistent.
 
@@ -128,7 +128,7 @@ If you read an item and then update it, your update should be based on at least 
 
 This helps avoid “lost updates.”
 
-### D) Causal consistency (simple version)
+### D) Causal consistency (practical definition)
 
 Cause comes before effect.
 
@@ -170,10 +170,10 @@ If you accept eventual consistency, you can:
 - write locally, replicate async
 - read locally (faster)
 
-Beginner-friendly way to explain it:
+Operational summary:
 
-- Strong consistency is “everyone agrees before answering.”
-- Eventual consistency is “answer now, agree shortly after.”
+- Strong consistency requires coordination and can reduce availability during partitions.
+- Eventual consistency reduces coordination but requires handling staleness, reordering, and duplicates.
 
 ---
 
