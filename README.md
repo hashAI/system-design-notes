@@ -21,7 +21,7 @@ If you deeply understand the fundamentals and can walk through the 15 core desig
   - [Horizontal vs vertical scaling](docs/fundamentals/horizontal-vs-vertical-scaling.md)
   - [Caching (Redis concepts, eviction, invalidation)](docs/fundamentals/caching.md)
   - [Database indexing](docs/fundamentals/database-indexing.md)
-  - SQL vs NoSQL (when and why)
+  - [SQL vs NoSQL (when and why)](docs/fundamentals/sql-vs-nosql.md)
   - Replication & sharding
   - CAP theorem (practical)
   - Consistency models
