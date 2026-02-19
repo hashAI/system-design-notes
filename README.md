@@ -33,7 +33,7 @@ If you deeply understand the fundamentals and can walk through the 15 core desig
   - [Rate limiter](docs/core-design-problems/rate-limiter.md)
   - [Chat system](docs/core-design-problems/chat-system.md)
   - [Notification system](docs/core-design-problems/notification-system.md)
-  - News feed / timeline
+  - [News feed / timeline](docs/core-design-problems/news-feed.md)
   - File storage (S3-lite)
   - API gateway
   - Payment system (high-level flow)
