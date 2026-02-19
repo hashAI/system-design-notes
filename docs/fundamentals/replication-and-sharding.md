@@ -43,9 +43,9 @@ Then call out the two classic gotchas:
 - **replication lag** (replicas can be behind)
 - extra storage cost
 
-Simple memory trick:
+Key point:
 
-- Replication = “photocopies of the same book in multiple rooms.”
+- replication increases availability and read capacity, but introduces lag and failover complexity.
 
 ---
 
@@ -80,7 +80,7 @@ It’s dangerous for:
 - inventory
 - permissions
 
-### Simple fix: read-your-writes
+### Read-your-writes (common requirement)
 
 If a user just changed something, route their reads to:
 
@@ -160,9 +160,9 @@ Practical takeaway:
 
 Sharding means your data is divided across multiple “shards” so no single machine holds everything.
 
-Simple memory trick:
+Key point:
 
-- Sharding = “tear a giant phonebook into smaller volumes and put them on different shelves.”
+- sharding scales writes and storage, but increases operational and query complexity.
 
 ### What sharding gives you
 
@@ -238,7 +238,7 @@ Even if you have 100 shards, one shard can melt.
 - one product during a flash sale
 - time-based shard where “current time” is hottest
 
-### Simple mitigations
+### Common mitigations
 
 - split hot shard (more shards, finer partitions)
 - isolate the celebrity/high-traffic keys
