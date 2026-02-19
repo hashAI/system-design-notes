@@ -682,9 +682,7 @@ Most real systems use a hybrid:
 
 ### Observability
 
-- **Golden signals**: latency, traffic, errors, saturation.
-- Correlation IDs across services; structured logs; trace sampling.
-- Alerts on symptoms (SLO burn rate) not just on raw metrics.
+- [Observability](docs/cross-cutting/observability.md)
 
 ### Security & privacy
 
