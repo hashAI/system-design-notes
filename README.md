@@ -26,7 +26,7 @@ If you deeply understand the fundamentals and can walk through the 15 core desig
   - [CAP theorem (practical)](docs/fundamentals/cap-theorem.md)
   - [Consistency models](docs/fundamentals/consistency-models.md)
   - [Rate limiting](docs/fundamentals/rate-limiting.md)
-  - Message queues (Kafka/RabbitMQ concepts)
+  - [Message queues (Kafka/RabbitMQ concepts)](docs/fundamentals/message-queues.md)
   - CDN basics
 - **Core design problems (practice these 15)**
   - URL shortener
