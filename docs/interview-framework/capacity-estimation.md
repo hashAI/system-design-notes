@@ -50,15 +50,13 @@ Write the numbers on the board. Then explicitly say: “The bottleneck is likely
 
 ### QPS from requests/day
 
-$$
-\text{Average QPS} \approx \frac{\text{requests/day}}{86{,}400}
-$$
+Average QPS:
+
+- `average_qps ≈ requests_per_day / 86,400`
 
 Peak QPS:
 
-$$
-\text{Peak QPS} \approx \text{Average QPS} \times \text{peak factor}
-$$
+- `peak_qps ≈ average_qps * peak_factor`
 
 Peak factor is a proxy for diurnal patterns + burstiness. If unsure:
 
@@ -68,9 +66,7 @@ Peak factor is a proxy for diurnal patterns + burstiness. If unsure:
 
 ### Bytes to bandwidth
 
-$$
-\text{Bandwidth} \approx \text{bytes/request} \times \text{QPS}
-$$
+- `bandwidth_bytes_per_sec ≈ bytes_per_request * qps`
 
 Convert:
 
@@ -79,9 +75,7 @@ Convert:
 
 ### Storage growth
 
-$$
-\text{storage/day} \approx \text{writes/day} \times \text{bytes/write}
-$$
+- `storage_per_day ≈ writes_per_day * bytes_per_write`
 
 Then multiply by:
 

@@ -142,13 +142,13 @@ Beginner-friendly summary:
 
 ## 5) Quorum replication (Dynamo-style idea)
 
-Some systems talk in terms of $N, R, W$:
+Some systems talk in terms of `N, R, W`:
 
-- $N$: number of replicas
-- $W$: how many replicas must confirm a write
-- $R$: how many replicas you read from
+- `N`: number of replicas
+- `W`: how many replicas must confirm a write
+- `R`: how many replicas you read from
 
-If $R + W > N$, reads and writes overlap, which improves consistency.
+If `R + W > N`, reads and writes overlap, which improves consistency.
 
 Practical takeaway:
 

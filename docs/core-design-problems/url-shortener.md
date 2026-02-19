@@ -177,7 +177,7 @@ Collision handling:
 Length choice:
 
 - Base62 has 62 characters.
-- 7 chars → $62^7 \approx 3.5 \times 10^{12}$ possibilities (huge).
+- 7 chars → 62^7 ≈ 3.5 × 10^12 possibilities (huge).
 
 ### Option B: Auto-increment ID → Base62
 

@@ -93,19 +93,19 @@ Example HTTP response headers (common pattern):
 
 Mental model:
 
-- bucket has capacity $B$ tokens
-- tokens refill at rate $r$ tokens/sec
+- bucket has capacity `B` tokens
+- tokens refill at rate `r` tokens/sec
 - each request consumes 1 token
 
 Why it’s good:
 
 - enforces an average rate
-- allows bursts up to $B$
+- allows bursts up to `B`
 
 Example:
 
 - “10 req/sec with bursts up to 50”
-  - $r = 10$, $B = 50$
+  - `r = 10`, `B = 50`
 
 ### B) Fixed window (simple, can be bursty)
 

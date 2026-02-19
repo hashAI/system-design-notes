@@ -172,7 +172,7 @@ Example:
 
 A simple, effective scoring function:
 
-- score = $a \cdot \text{count\_7d} + b \cdot \text{count\_1d} + c \cdot \text{count\_1h}$
+- score = `a * count_7d + b * count_1d + c * count_1h`
 - plus click-through rate boosts
 
 ### Step 4: Generate prefix maps
