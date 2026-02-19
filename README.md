@@ -23,7 +23,7 @@ If you deeply understand the fundamentals and can walk through the 15 core desig
   - [Database indexing](docs/fundamentals/database-indexing.md)
   - [SQL vs NoSQL (when and why)](docs/fundamentals/sql-vs-nosql.md)
   - [Replication & sharding](docs/fundamentals/replication-and-sharding.md)
-  - CAP theorem (practical)
+  - [CAP theorem (practical)](docs/fundamentals/cap-theorem.md)
   - Consistency models
   - Rate limiting
   - Message queues (Kafka/RabbitMQ concepts)
