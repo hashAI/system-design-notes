@@ -41,7 +41,7 @@ If you deeply understand the fundamentals and can walk through the 15 core desig
   - [Search autocomplete](docs/core-design-problems/search-autocomplete.md)
   - [Video streaming (basic scaling ideas)](docs/core-design-problems/video-streaming.md)
   - [Distributed cache](docs/core-design-problems/distributed-cache.md)
-  - Job scheduler
+  - [Job scheduler](docs/core-design-problems/job-scheduler.md)
   - E-commerce system
   - Ride-sharing matching (high level)
 
