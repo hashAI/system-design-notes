@@ -678,9 +678,7 @@ Most real systems use a hybrid:
 
 ### Data correctness patterns
 
-- **Idempotency** for all writes that can be retried.
-- **Outbox pattern** for reliable event publishing from DB-backed services.
-- **Exactly-once is rare**; prefer at-least-once + dedupe.
+- [Data correctness patterns](docs/cross-cutting/data-correctness-patterns.md)
 
 ### Observability
 
