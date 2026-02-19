@@ -1,4 +1,4 @@
-# Database indexing — simple, memorable deep dive
+# Database indexing — practical deep dive
 
 Indexes are one of the most important “make it fast” tools in system design.
 
@@ -6,6 +6,22 @@ If caching is like keeping a copy at the front desk, **indexing is like adding a
 
 - Without an index, the database may have to scan many rows (“read the whole book”).
 - With an index, it can jump straight to the right place (“use the table of contents”).
+
+---
+
+## 0) The default indexing plan (useful in most designs)
+
+When you’re designing a system and you’re not sure what indexes you need, start here:
+
+- **List the top 3–5 queries** (the queries that happen the most and/or must be fast).
+- Add indexes to support:
+  - the **filter** (`WHERE ...`)
+  - the **sort** (`ORDER BY ...`)
+  - the **pagination cursor** (if you paginate)
+- Keep the number of indexes small at first (indexes slow writes).
+- Validate with `EXPLAIN` once you have a real query.
+
+This is the same “requirements → hot queries → design” mindset you use in the core design problems.
 
 ---
 
@@ -171,6 +187,55 @@ If something is slow:
 In interviews you don’t need deep SQL, but you should mention:
 
 - “We’ll use `EXPLAIN` to confirm indexes are used.”
+
+---
+
+## 9.1) Worked examples (what you’d say in a design)
+
+### Example A: “List a user’s orders, newest first”
+
+Query:
+
+- `SELECT * FROM orders WHERE user_id = ? ORDER BY created_at DESC LIMIT 50`
+
+Index:
+
+- `(user_id, created_at DESC)` (or `(user_id, created_at, id)` for stable cursor paging)
+
+Why:
+
+- filters by `user_id`
+- sorts by `created_at`
+- supports efficient cursor pagination
+
+### Example B: “Find user by email”
+
+Query:
+
+- `SELECT * FROM users WHERE email = ?`
+
+Index:
+
+- unique index on `email`
+
+Why:
+
+- high selectivity
+- correctness benefit (enforces uniqueness)
+
+### Example C: “Search by status within a user”
+
+Query:
+
+- `SELECT * FROM orders WHERE user_id = ? AND status = ? ORDER BY created_at DESC`
+
+Index:
+
+- `(user_id, status, created_at DESC)`
+
+Why:
+
+- `status` alone has low selectivity, but combined with `user_id` it can be useful.
 
 ---
 
