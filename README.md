@@ -28,6 +28,13 @@ If you deeply understand the fundamentals and can walk through the 15 core desig
   - [Rate limiting](docs/fundamentals/rate-limiting.md)
   - [Message queues (Kafka/RabbitMQ concepts)](docs/fundamentals/message-queues.md)
   - [CDN basics](docs/fundamentals/cdn-basics.md)
+  - [Consensus and leader election](docs/fundamentals/consensus-and-leader-election.md)
+  - [Logical clocks (Lamport, vector clocks)](docs/fundamentals/logical-clocks.md)
+  - [Bloom filters and probabilistic structures](docs/fundamentals/bloom-filters-and-probabilistic-structures.md)
+  - [Storage engines: LSM vs B-Tree](docs/fundamentals/storage-engines-lsm-vs-btree.md)
+  - [Architecture patterns (CQRS, Event Sourcing, Saga, Microservices)](docs/fundamentals/architecture-patterns.md)
+  - [Disaster recovery (RTO, RPO)](docs/fundamentals/disaster-recovery-rto-rpo.md)
+  - [Networking protocols (TCP, UDP, HTTP, gRPC)](docs/fundamentals/networking-protocols.md)
 - **Core design problems (practice these 15)**
   - [URL shortener](docs/core-design-problems/url-shortener.md)
   - [Rate limiter](docs/core-design-problems/rate-limiter.md)
@@ -278,6 +285,60 @@ Tie to product UX: chat “sent” indicators, feed freshness, inventory accurac
   - TLS termination, connection reuse, edge compute, request collapsing.
 - **Pitfalls**
   - Cache poisoning, incorrect cache keys (e.g., missing auth/user dimension), stale content.
+
+### Consensus and leader election
+
+**Goal**: agree on a single leader when replicas can fail and the network can partition.
+
+- **Split-brain**: two leaders accept writes → data corruption. Prevent with quorum.
+- **Quorum**: majority of nodes; at most one side can have quorum during a partition.
+- **Paxos**: classic consensus; correct but complex.
+- **Raft**: leader-based; used by etcd, Consul. Easier to understand and implement.
+- **Failure detection**: heartbeats, timeouts, leases.
+
+### Logical clocks (Lamport, vector clocks)
+
+**Goal**: order events in distributed systems without relying on physical time.
+
+- **Lamport timestamps**: single counter; if A happened-before B, Lamport(A) < Lamport(B). Cannot detect concurrency.
+- **Vector clocks**: per-node counters; incomparable vectors → concurrent events. Used for conflict detection in multi-leader replication.
+- **Use cases**: distributed log ordering, conflict resolution, causal consistency.
+
+### Bloom filters and probabilistic structures
+
+**Goal**: answer "does this exist?" or "how many unique?" with bounded memory.
+
+- **Bloom filter**: "Is X in the set?" — no false negatives; small false positive rate. Use before DB/cache lookup.
+- **HyperLogLog**: cardinality estimation (~1.5% error). "How many unique visitors?"
+- **Count-Min Sketch**: frequency estimation. "Top K heavy hitters."
+
+### Storage engines: LSM vs B-Tree
+
+**Goal**: choose the right storage engine for read vs write workload.
+
+- **B-Tree**: predictable read latency, range scans. In-place updates. PostgreSQL, MySQL.
+- **LSM**: high write throughput (append-only). Read amplification; compaction. Cassandra, RocksDB.
+- **Tradeoffs**: B-Tree for read-heavy; LSM for write-heavy, append-heavy (logs, events).
+
+### Architecture patterns (CQRS, Event Sourcing, Saga, Microservices)
+
+- **CQRS**: separate read and write models; scale and optimize independently. Good for feeds, dashboards.
+- **Event Sourcing**: store changes as events; replay for state. Audit, time travel.
+- **Saga**: multi-step workflow across services; compensating actions on failure. Alternative to 2PC.
+- **Microservices vs Monolith**: start monolith; split when team size, scale, or fault isolation demands it.
+
+### Disaster recovery (RTO, RPO)
+
+- **RPO** (Recovery Point Objective): max acceptable data loss. Drives backup frequency, sync vs async replication.
+- **RTO** (Recovery Time Objective): max acceptable downtime. Drives failover strategy, hot standby.
+- **Strategies**: backups, replication, active-passive, active-active. Test DR regularly.
+
+### Networking protocols (TCP, UDP, HTTP, gRPC)
+
+- **TCP**: reliable, ordered. Use for APIs, DB, most traffic.
+- **UDP**: low latency, unreliable. Use for video, gaming, VoIP when latency beats reliability.
+- **HTTP/2**: multiplexing, header compression. Better for many small requests.
+- **gRPC**: HTTP/2 + protobuf. High performance, streaming. Best for service-to-service.
 
 ---
 
@@ -696,14 +757,17 @@ Most real systems use a hybrid:
 - **Data**: pick a store and justify it; define partition keys and indexes.
 - **Caching**: where, what, TTL/invalidation strategy; stampede protection.
 - **Consistency**: what is strongly consistent vs eventually consistent and why.
+- **Consensus**: quorum, split-brain prevention, when Raft/Paxos applies.
 - **Failures**: dependency down, partial outage, queue backlog, hot shard, data corruption.
+- **DR**: RTO/RPO targets; backup and failover strategy.
 - **Ops**: dashboards + alerts + runbooks; deploy strategy and rollback.
 
 ---
 
-## Suggested study plan (4 weeks, adaptable)
+## Suggested study plan (5 weeks, adaptable)
 
-- **Week 1**: fundamentals (one topic/day) + 2 mock designs (URL shortener, rate limiter)
-- **Week 2**: chat + notifications + feed + caching deep dive
-- **Week 3**: storage systems (S3-lite, distributed cache, video) + observability
-- **Week 4**: payments + e-commerce + ride matching + 5 full mocks with timed practice
+- **Weeks 1–2**: fundamentals (one topic/day; ~18 topics)
+- **Week 2**: start 2 mock designs (URL shortener, rate limiter)
+- **Week 3**: chat + notifications + feed + caching deep dive
+- **Week 4**: storage systems (S3-lite, distributed cache, video) + observability
+- **Week 5**: payments + e-commerce + ride matching + 5 full mocks with timed practice
